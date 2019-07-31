@@ -5,6 +5,8 @@
  * @author megha,2019
  * @modifier Sehyun, 2019
  * @modifier Kowsiya, 2019
+ * @modifier Yui, 2019
+ * 
  */
 package project;
 
@@ -57,8 +59,19 @@ public class Game {
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter the name of the first player. : ");
         String user1 = input.nextLine();
-        System.out.print("Please enter the name of the second player. : ");
-        String user2 = input.nextLine();
+        
+        String user2 = null; 
+        while(checkExistedName(user1, user2) == false){   
+            System.out.print("Please enter the name of the second player. : ");
+            user2 = input.nextLine();
+            if(user1.equals(user2)){
+                System.out.println("The name already existed. "
+                        + "Please enter different name.");
+            }else {
+                break;
+            }   
+        }
+        
         String answer= "";
         int limitNum = 0;
         
@@ -174,5 +187,13 @@ public class Game {
      */
     public String checkFinalWinner(Player p1, Player p2) {
         return p1.getCardInfo().isEmpty() ? p2.getPlayerName() : p1.getPlayerName();
+    }
+    
+    public static boolean checkExistedName(String user1, String user2){
+        if(user1.equalsIgnoreCase(user2)){
+            return true;
+        }else {
+            return false;
+        }
     }
 }
